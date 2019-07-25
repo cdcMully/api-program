@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: c69a672745cdb674b9761695b09c2a85
+  - enabled: 1
+    path: Assets/Scenes/Individual Pokemon.unity
+    guid: a6e74ad88c8e3234b9f7269ec3309334
   m_configObjects: {}

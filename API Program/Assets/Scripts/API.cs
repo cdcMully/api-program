@@ -13,9 +13,14 @@ public class API : MonoBehaviour
     private RootObject jsonResponse;
     public InputField mainInputField;
 
+    private void Start()
+    {
+        Request();
+    }
+
     public void Request()
     {        
-        StartCoroutine(getTextCo(URL + mainInputField.text.ToString().ToLower()));        
+        StartCoroutine(getTextCo(URL + PlayerPrefs.GetString("pokemon")));        
     }
 
     private IEnumerator getTextCo(string URL)
