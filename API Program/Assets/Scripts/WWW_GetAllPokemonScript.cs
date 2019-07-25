@@ -35,8 +35,9 @@ public class WWW_GetAllPokemonScript : MonoBehaviour
         foreach (Result pokemon in pokemonList)
         {
             GameObject listItem = Instantiate(buttonListItem, new Vector2(0, 0), Quaternion.identity);
-            listItem.transform.SetParent(contentWindow.transform);
+            listItem.transform.SetParent(contentWindow.transform, false);            
             listItem.name = pokemon.name;
+            listItem.GetComponent<ButtonListItemScript>().Setup(pokemon.name);
         }
     }
 }
