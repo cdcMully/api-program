@@ -6,10 +6,11 @@ public class WWW_GetAllPokemonScript : MonoBehaviour
 {
     private const string URL = "https://pokeapi.co/api/v2/pokemon/?limit=964";
     private RootObject2 jsonResponse;
+    private bool sorting = false;
 
     public List<Result> pokemonList;
     public GameObject buttonListItem;
-    public GameObject contentWindow;
+    public GameObject contentWindow;    
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +28,13 @@ public class WWW_GetAllPokemonScript : MonoBehaviour
 
         yield return jsonResponse;
 
-        foreach (Result result in jsonResponse.results)
+        pokemonList = jsonResponse.results;        
+
+        SortPokemonList();
+
+        if (sorting)
         {
-            pokemonList.Add(result);
+            yield return null;
         }
 
         foreach (Result pokemon in pokemonList)
@@ -39,14 +44,37 @@ public class WWW_GetAllPokemonScript : MonoBehaviour
             listItem.name = pokemon.name;
             listItem.GetComponent<ButtonListItemScript>().Setup(pokemon.name);
         }
+
+        if (PlayerPrefs.HasKey("contentPosition"))
+        {
+            contentWindow.transform.position = new Vector2(contentWindow.transform.position.x, PlayerPrefs.GetFloat("contentPosition"));
+        }        
+    }
+
+    private void SortPokemonList()
+    {
+        sorting = true;
+        pokemonList.Sort();        
+        sorting = false;
     }
 }
 
 [System.Serializable]
-public class Result
+public class Result: System.IComparable<Result>
 {
     public string name;
     public string url;
+
+    public int CompareTo(Result compareResult)
+    {
+        if (compareResult == null)
+        {
+            return 1;
+        } else
+        {
+            return this.name.CompareTo(compareResult.name);
+        }
+    }
 }
 
 [System.Serializable]

@@ -7,6 +7,6 @@ public class SceneManagerScript : MonoBehaviour
 {
     public void GoHome()
     {
-        SceneManager.LoadSceneAsync("Main");
+        SceneManager.LoadScene("Main");
     }
 }

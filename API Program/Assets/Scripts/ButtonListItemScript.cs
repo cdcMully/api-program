@@ -9,7 +9,7 @@ public class ButtonListItemScript : MonoBehaviour
 
     public Text nameText;
 
-    private string pokemonName;
+    private string pokemonName;    
 
     public void Setup(string name)
     {
@@ -20,7 +20,7 @@ public class ButtonListItemScript : MonoBehaviour
     public void OpenPokemonScreen()
     {
         PlayerPrefs.SetString("pokemon", pokemonName);
-
-        SceneManager.LoadSceneAsync("Individual Pokemon");
-    }
+        PlayerPrefs.SetFloat("contentPosition", GameObject.Find("Content").transform.position.y);
+        SceneManager.LoadScene("Individual Pokemon");        
+    }   
 }
